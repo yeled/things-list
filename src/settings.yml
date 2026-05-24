@@ -1,0 +1,52 @@
+---
+strategy: webhook
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: latest
+serverless_language: node
+polling_url: ''
+polling_headers: ''
+polling_body: ''
+id: 314111
+custom_fields:
+- keyname: doesnt_matter
+  name: About This Plugin
+  category: life,productivity
+  field_type: author_bio
+  description: 'Shows todays To-Dos from Things on your TRMNL.<br> Note: You need to set up <a href=''https://www.icloud.com/shortcuts/f9614b184d624de8b1d36eceb16e428b'' target=''_blank''>this Apple Shortcut</a> in order for it to work (and have Things installed on the device you''re running it on. Duh)<br><strong>Current Version:</strong> v1.1 (updated to reduce Webhook size)<br><br>For optimal performance I recommend setting up an automation to trigger the shortcut on a certain time in the morning, when you close Things, and when connecting to your home wifi (all three for optimal blastage).<br><br>Options and features may be added as I feel like it but for now it displays the todays for today split by deadlines and other to-dos. I try to keep the plugin + shortcut as backwards compatible as possible but if something breaks make sure to check the option fields whether a new shortcut is available (or just fork this plugin for optimal stability).<br><br>If there is an option you cannot live without and feel like should be present feel free to scream it into the void or send me a mail. <br><br>(I am not affiliated with Things or Cultured Code. I just love their app.)'
+  learn_more_url: https://culturedcode.com/things/
+  email_address: estinunderscore@mailbox.org
+- keyname: webhook_url
+  name: Webhook URL
+  field_type: copyable_webhook_url
+  description: Paste this into the Apple Shortcut!
+- keyname: lines_title
+  name: Maximum Lines Title
+  description: 0 = No limit
+  field_type: number
+  group: Display Options
+  default: 2
+  min: 0
+  max: 6
+- keyname: lines_description
+  name: Maximum Lines Description
+  description: 0 = No limit, -1 = Always Hide description
+  field_type: number
+  group: Display Options
+  default: 2
+  min: -1
+  max: 6
+- keyname: show_dones
+  name: Show Finished To-Dos
+  field_type: boolean
+  group: Display Options
+  default: true
+- keyname: show_progress
+  name: Show Progress Dots
+  field_type: boolean
+  group: Display Options
+  default: true
+name: Things List
+refresh_interval: 15

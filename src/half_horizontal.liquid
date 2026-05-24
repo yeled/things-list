@@ -1,0 +1,26 @@
+<div class="layout px--4 py--2">
+  <div class="columns" data-overflow-max-cols="3" data-overflow-counter="true">
+    <div class="column"> 
+      {% if crit_todos != blank %}
+      {{ deadlines }}
+      {% endif %}
+      {% if reg_todos != blank %}
+      {{ regular_todos }}
+      {% endif %}
+      {% if todos == blank and total != blank %}
+        {{ empty_state }}
+      {% elsif total == blank %}
+        {{ no_data-hor }}
+      {% elsif dones != blank and crit_todos == blank %}
+        {{ done_todos }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+<div class="title_bar">
+  <img class="image image-stroke image-stroke--small" src="data:image/svg+xml;base64,{{ things_logo | base64_encode }}" alt="icon">
+  <span class="title">{{ trmnl.plugin_settings.instance_name }}</span>
+  <div class="flex flex--row w--full flex--right">
+  {{ progress_dots }}
+  </div>
+</div>

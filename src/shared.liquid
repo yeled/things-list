@@ -1,0 +1,295 @@
+{% assign crit_todos = todos | where_exp: "item", "item.deadline != blank" %}
+{% assign reg_todos = todos | where_exp: "item", "item.deadline == blank and item.evening == false" %}
+{% assign even_todos = todos | where_exp: "item", "item.deadline == blank and item.evening == true" %}
+
+{%- capture things_logo %}
+<svg height="1000" viewBox="0 0 1000 1000" width="1000" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m200 130h600v710h-600z" fill="#2473e7"/><path d="m231.901051 658.4525h536.197856v208h-536.197856z" fill="#bec2c8"/><path d="m236.654192 287.903008.184982-11.911963c.170123-4.938427.30325-11.431919 2.191891-18.617731 1.828598-7.135776 5.98009-14.860766 12.524528-20.754733 6.453464-5.979484 14.848637-9.717647 22.571504-11.320323 7.778363-1.657261 14.781315-1.703355 20.105779-1.802518l12.83263-.030931h385.869249l12.832631.030931c5.32416.099163 12.327112.145257 20.105475 1.802518 7.722867 1.602676 16.11804 5.340839 22.571504 11.320323 6.544741 5.893967 10.69593 13.618957 12.524528 20.754733 1.888944 7.185812 2.022071 13.679304 2.192194 18.617731l.184983 11.911963 4.630324 364.703309.07096 5.635598.051553 6.713349-.433648 11.179614-1.316408 8.178653c-1.680915 7.432051-5.721418 15.497894-12.268282 21.662966-6.451037 6.254229-14.9572 10.173431-22.82775 11.853133-7.926349 1.737016-15.097605 1.785536-20.54731 1.889551l-13.140126.032448h-76.81929-241.592907-76.718611l-13.139822-.032448c-5.449706-.104015-12.620962-.152535-20.547311-1.889551-7.870853-1.679702-16.376713-5.598904-22.82775-11.853133-6.546864-6.165072-10.58767-14.230915-12.268282-21.662966l-1.316408-8.178653-.433951-11.179614.051553-6.713956.07096-5.634991z" fill="#fff"/><path d="m635.32514 74.4429067 38.966109.100679c17.429293.3223548 40.348625.4715538 65.817683 5.85879 25.287714 5.2116545 52.799161 17.3625788 74.01817 36.8497273 21.513768 19.206945 35.251296 44.432796 41.367545 67.798815 6.314575 23.527348 6.859212 44.84643 7.496947 61.083648l.749027 36.371198.563135 32.115388 1.669998 95.200183 1.685464 96.077181.575265 32.81165.544024 37.407404-.000024.83503-.000614 1.694411c-.008923 11.97375-.142779 26.307369-2.150611 42.336396l-22.58697 176.542143-3.118926 17.559994c-5.107337 23.084603-17.508139 48.202497-37.720358 67.438251-19.912911 19.512318-46.244412 31.77029-70.625105 37.02167-24.55294 5.432421-46.77419 5.584956-63.657937 5.909736l-37.763419.101892h-262.309128l-37.763419-.101892c-16.883747-.32478-39.104997-.477315-63.657937-5.909736-24.38039-5.25138-50.711891-17.509352-70.624802-37.02167-20.212522-19.235754-32.613021-44.353648-37.720358-67.438251l-3.119229-17.559994-22.586667-176.542143c-2.008076-16.029027-2.141947-30.362646-2.150872-42.336396l-.000638-2.529441.543982-37.407404.575569-32.81165 1.685463-96.077181 1.669695-95.200183.563438-32.115388.749028-36.371198c.637734-16.237218 1.182068-37.5563 7.496643-61.083648 6.116552-23.366019 19.854081-48.59187 41.367545-67.798815 21.219009-19.4871485 48.730456-31.6380728 74.01817-36.8497273 25.469058-5.3872362 48.388693-5.5364352 65.817987-5.85879l38.965805-.100679zm4.894758 69.5318893h-280.439535l-33.042423.051552c-13.215938.167091-28.937328.2332-44.83339 3.002175-15.84269 2.701048-31.549827 8.916763-43.068171 19.552044-11.686952 10.477591-18.656244 24.90198-21.802159 39.530154-3.221122 14.675481-3.497382 29.253921-3.849759 41.527358l-.482167 30.734388-.469735 33.907899-1.351585 97.540969-1.364625 98.461635-.480348 34.664811-.380882 31.618058c.000251.308857.000415.619159.000537.930874l.00059 1.886984c.005183 12.05497.08183 26.055721 2.742073 40.205736 2.795055 15.214356 9.511133 30.294069 21.202936 41.279906 3.149858 3.005511 6.614793 5.718689 10.328089 8.104963l1.449232.907627 6.957161 3.7603 12.734984 4.885661 12.208238 3.008847 14.089905 2.267096 14.07171 1.705782 9.121153 1.108985 8.855204 1.244841 14.460779 2.701655 6.631471 1.639066 6.15173 1.826778 3.6484 1.256365 3.419447 1.322776c9.171493 3.73513 14.96933 8.070392 17.989397 12.11787 3.780618 5.056997 4.071738 9.592101 4.434728 13.028227l.402716 7.704672.393922 9.018959 1.375542 31.51192 1.330056 30.468741.308707 7.077855.19226 3.670841c.172549 1.609348.313561 3.722697 2.122144 6.057722 1.751268 2.318649 5.706255 4.824101 11.919241 6.73306l1.522315.452145c5.890631 1.684251 13.152559 2.729857 19.878947 3.211721l19.048649.582847 11.311528.010007h101.984795l11.311528-.010007 19.048649-.582847c6.763991-.483987 14.06989-1.5396 19.977503-3.23962l1.423759-.424246c6.212683-1.908959 10.167669-4.414411 11.918938-6.73306 1.80828-2.335025 1.949291-4.448374 2.121537-6.057722l.19226-3.670841.308709-7.077855 1.328841-30.468741 1.374329-31.51192.393619-9.018959.402109-7.704672c.363294-3.436126.654111-7.97123 4.434728-13.028227 3.030378-4.062943 8.863391-8.416097 18.093412-12.160628l3.370623-1.300336 3.5923-1.236047 6.173867-1.83254 6.656337-1.643615 14.517184-2.706506 8.805167-1.234531 9.067478-1.099888 14.123263-1.7076 14.141457-2.27104 12.098765-2.974579 12.697684-4.848664 6.944425-3.733008 1.470763-.916421c3.765152-2.407502 7.277393-5.150701 10.465764-8.193209 11.692107-10.985837 18.407881-26.06555 21.202936-41.279906l1.671514-11.653291c.935806-9.488413 1.071092-18.617275 1.080728-26.923804l.000019-2.244681c-.000693-.741199-.001919-1.475254-.003168-2.201818l-.386775-31.618058-.480348-34.664811-1.364322-98.461635-1.351585-97.540969-.470038-33.907899-.482167-30.734388c-.352073-12.273437-.628334-26.851877-3.849759-41.527358-3.145612-14.628174-10.115207-29.052563-21.802159-39.530154-11.518344-10.635281-27.225481-16.850996-43.068171-19.552044-15.896062-2.768975-31.617452-2.835084-44.83339-3.002175z" fill="#2473e7"/><path d="m450.287145 569.386633c15.879383 17.388658 27.610306 23.047606 38.520331 21.756064 10.910329-1.291845 20.999456-9.533876 31.95315-29.94624 41.366332-65.311559 86.897197-127.648236 135.986397-186.408079 8.813052-10.698963 15.466053-17.53725 17.047199-25.649188 1.580842-8.111937-1.910172-17.497828-8.893716-22.765887-6.983544-5.267756-17.459619-6.417983-25.599455-3.265093-8.139837 3.15289-13.943739 10.608898-23.184979 20.963673-48.777156 55.76161-94.400209 114.824399-136.339684 176.691948l-54.828813-50.27794c-10.481533-9.502036-17.297077-16.477392-26.245681-19.060173-8.948301-2.582477-20.029662-.772377-27.104788 5.636811-3.537715 3.204443-6.073794 7.55881-7.120613 12.098766-1.046819 4.539955-.604378 9.2655.858197 13.456112 2.925453 8.380617 9.932651 14.620592 20.220104 24.541719z" fill="#05101c" fill-opacity=".8"/></g></svg>
+{% endcapture -%}
+{%- capture icon_bell %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg>
+{% endcapture -%}
+{%- capture icon_project %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M1.5 3.25c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5A1.75 1.75 0 0 1 5.75 7.5h-2.5A1.75 1.75 0 0 1 1.5 5.75Zm7 0c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a1.75 1.75 0 0 1-1.75 1.75h-2.5A1.75 1.75 0 0 1 8.5 5.75Zm-7 7c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a1.75 1.75 0 0 1-1.75 1.75h-2.5a1.75 1.75 0 0 1-1.75-1.75Zm7 0c0-.966.784-1.75 1.75-1.75h2.5c.966 0 1.75.784 1.75 1.75v2.5a1.75 1.75 0 0 1-1.75 1.75h-2.5a1.75 1.75 0 0 1-1.75-1.75ZM3.25 3a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h2.5A.25.25 0 0 0 6 5.75v-2.5A.25.25 0 0 0 5.75 3Zm7 0a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 0 0 .25-.25v-2.5a.25.25 0 0 0-.25-.25Zm-7 7a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 0 0 .25-.25v-2.5a.25.25 0 0 0-.25-.25Zm7 0a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h2.5a.25.25 0 0 0 .25-.25v-2.5a.25.25 0 0 0-.25-.25Z"></path></svg>
+{% endcapture -%}
+{%- capture icon_star %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#555555" class="size-6">
+  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+</svg>
+{% endcapture -%}
+{%- capture icon_moon %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+  <path d="M14.438 10.148c.19-.425-.321-.787-.748-.601A5.5 5.5 0 0 1 6.453 2.31c.186-.427-.176-.938-.6-.748a6.501 6.501 0 1 0 8.585 8.586Z" />
+</svg>
+{% endcapture -%}
+{%- capture apple_shortcut-img %}
+<img class="shrink-0" alt="Apple Shortcut Link" style="width: 132px; image-rendering: pixelated;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhAQMAAABtKlAsAAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlP/AOW3MEoAAADLSURBVHgBDUsDbF4BEP7eH8y2t2gKhtoMage1bftq27bbuLZtR21Q28Y73wcwT7XaAO9PUbqAtOK3cXb+OlZm5/kxe3ubDi4AjLq6GHBTU+FL+Ltz1wywiT2sIvQbvA8kFA8JZBDmZ36oAOd8UzuEj5n/+AgrrmkFhLCod7NA4/5hBeFbVyYX4cVQhSVhMcn/DeCS7vGbsHmu8ZCwPFuuy3rv3eUQbrhq7QgMCaoRvGUDXAjSjhUcQHpObYyd2X+lWJwr1pfA3IMlbgFqBUhBLMOFogAAAABJRU5ErkJggg==" />
+{% endcapture -%}
+
+{%- capture deadlines %}
+<span class="label label--medium group-header" data-group-header="true">Deadlines</span>
+{% for todo in crit_todos %}
+<div class="item item--emphasis-2">
+  <div class="meta">
+    <span class="index text--black">!</span>
+  </div>
+  <div class="content">
+    <span class="title title--small font--regular" 
+      {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
+        data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_title }}"
+      {% endif %}
+      >
+      {{ todo.title }}
+    </span>
+    {% if todo.description != blank and trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 != -1 %}
+    <span class="description mt--0.5 mb--1" 
+      {% if trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 > 0 %}
+      data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_description }}"
+      {% endif %}
+      >{{ todo.description }}
+    </span>
+    {% endif %}
+    {% if todo.deadline contains 'in' and todo.deadline contains 'hours' %}
+      <span class="description">tomorrow</span>
+    {% elsif todo.deadline contains 'hours ago' %}
+      <span class="label label--filled label--small 2bit:bg--error">today</span>
+    {% elsif todo.deadline contains 'day ago' or todo.deadline contains 'days ago' %}
+      <span class="label label--filled label--small 2bit:bg--error">Overdue: {{ todo.deadline }}</span>
+    {% else %}
+      <span class="description">{{ todo.deadline }}</span>
+    {% endif %}
+    {% if todo.project != blank or todo.reminder != blank %} 
+      <div class="flex flex--row">
+        {% if todo.project != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2.5 h--2.5 mr--1" src="data:image/svg+xml;base64,{{ icon_project | base64_encode }}" />
+          {{ todo.project }}
+        </span>
+        {% endif %}
+        {% if todo.reminder != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2 h--2 mr--0.5" src="data:image/svg+xml;base64,{{ icon_bell | base64_encode }}" />
+          {{ todo.reminder }}
+        </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endcapture -%}
+
+{%- capture regular_todos %}
+<span class="label label--medium group-header" data-group-header="true">{% if crit_todos != blank %}Other {% endif %}To-Dos</span>
+{% for todo in reg_todos %}
+<div class="item">
+  <div class="meta"></div>
+  <div class="content">
+    <span class="title title--small font--regular"
+      {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
+        data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_title }}"
+      {% endif %}
+      >{{ todo.title }}</span>
+    {% if todo.description != blank and trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 != -1 %}
+    <span class="description mt--0.5 mb--1" 
+      {% if trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 > 0 %}
+      data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_description }}"
+      {% endif %}
+      >{{ todo.description }}
+    </span>
+    {% endif %}
+    {% if todo.project != blank or todo.reminder != blank %} 
+      <div class="flex flex--row">
+        {% if todo.project != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2.5 h--2.5 mr--1" src="data:image/svg+xml;base64,{{ icon_project | base64_encode }}" />
+          {{ todo.project }}
+        </span>
+        {% endif %}
+        {% if todo.reminder != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2 h--2 mr--0.5" src="data:image/svg+xml;base64,{{ icon_bell | base64_encode }}" />
+          {{ todo.reminder }}
+        </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% for todo in even_todos %}
+<div class="item">
+  <div class="meta">
+    <img class="image image-stroke image-stroke--small w--2 h--2" src="data:image/svg+xml;base64,{{ icon_moon | base64_encode }}" />
+  </div>
+  <div class="content">
+    <span class="title title--small font--regular"
+      {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
+        data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_title }}"
+      {% endif %}
+      >{{ todo.title }}</span>
+    {% if todo.description != blank and trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 != -1 %}
+    <span class="description mt--0.5 mb--1" 
+      {% if trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 > 0 %}
+      data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_description }}"
+      {% endif %}
+      >{{ todo.description }}
+    </span>
+    {% endif %}
+    {% if todo.project != blank or todo.reminder != blank %} 
+      <div class="flex flex--row">
+        {% if todo.project != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2.5 h--2.5 mr--1" src="data:image/svg+xml;base64,{{ icon_project | base64_encode }}" />
+          {{ todo.project }}
+        </span>
+        {% endif %}
+        {% if todo.reminder != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2 h--2 mr--0.5" src="data:image/svg+xml;base64,{{ icon_bell | base64_encode }}" />
+          {{ todo.reminder }}
+        </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endcapture -%}
+
+{% if trmnl.plugin_settings.custom_fields_values.show_dones == "true" %}
+{%- capture done_todos %}
+<span class="label label--medium group-header" data-group-header="true">Finished</span>
+{% for todo in dones %}
+<div class="item">
+  <div class="meta">
+    <span class="index text--bold">✓</span>
+  </div>
+  <div class="content">
+    <span 
+      class="title title--small font--regular text--gray-25" 
+      style="text-decoration: line-through; text-decoration-color: black;"
+      {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
+        data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_title }}"
+      {% endif %}
+      >{{ todo.title }}</span>
+    {% if todo.project != blank or todo.reminder != blank %} 
+      <div class="flex flex--row">
+        {% if todo.project != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2.5 h--2.5 mr--1" src="data:image/svg+xml;base64,{{ icon_project | base64_encode }}" />
+          {{ todo.project }}
+        </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endcapture -%}
+{% endif%}
+
+{% assign dones_size = dones.size %}
+{% assign current = dones_size | plus: 1 %}
+
+{% if trmnl.plugin_settings.custom_fields_values.show_progress == "true" %}
+{%- capture progress_dots %}
+<div class="progress-dots progress-dots--small w--auto">
+<div class="track flex--row-reverse">
+  {% for i in (1..total) %}
+    {% if i <= dones_size %}
+      <div class="dot dot--filled"></div>
+    {% elsif i == current %}
+      <div class="dot dot--current"></div>
+    {% else %}
+      <div class="dot"></div>
+    {% endif %}
+  {% endfor %}
+</div>
+</div>
+{% endcapture -%}
+{%- capture progress_dots--small %}
+<div class="progress-dots progress-dots--xsmall w--auto">
+<div class="track flex--row-reverse">
+  {% for i in (1..total) %}
+    {% if i <= dones_size %}
+      <div class="dot dot--filled"></div>
+    {% elsif i == current %}
+      <div class="dot dot--current"></div>
+    {% else %}
+      <div class="dot"></div>
+    {% endif %}
+  {% endfor %}
+</div>
+</div>
+{% endcapture -%}
+{%- capture progress_bar %}
+    <div class="progress-bar progress-bar--xsmall progress-bar--emphasis-3 w--full w--min-40">
+      <!-- div class="content">
+        <span class="label title--small">
+          {{ dones.size }}
+          {% if dones.size > 1 or dones.size == 0 %}
+            
+            Tasks
+          
+            {% else %}
+            
+            Task
+          
+          {% endif %}
+           finished
+        
+        
+        </span>
+        <span class="label label--small">
+          
+          
+          Total: 
+          
+          
+          {{ total }}
+        </span>
+      </div -->
+    <div class="track">
+      <div class="fill" style="width: calc({{ dones.size }} / {{ total }} * 100%)"></div>
+    </div>
+  </div>
+{% endcapture -%}
+{% endif %}
+
+{%- capture empty_state %}
+{% if total == 0 %}
+<div class="flex flex--col">
+  <div class="flex flex--col gap--xsmall">
+    <span class="title--large">No tasks today!</span>
+    <span class="description--large font--regular">Make sure to add new tasks in Things!</span>
+  </div>
+</div>
+{% else %}
+<div class="flex flex--col">
+  <img class="image w--12" src="data:image/svg+xml;base64,{{ icon_star | base64_encode }}" alt="icon">
+  <div class="flex flex--col gap--xsmall">
+    <span class="title--large">All done!</span>
+    <span class="description--large font--regular">You've finished {{ total }} tasks today!</span>
+  </div>
+</div>
+{% endif %}
+{% endcapture -%}
+
+{%- capture no_data-hor %}
+<div class="flex gap--large flex--center">
+  <div class="flex flex--col gap--xsmall flex--stretch">
+    <span class="title">No data found (yet)</span>
+    <span class="description--large font--regular">Get the Apple Shortcut to load your tasks into this plugin:</span>
+  </div>
+  {{ apple_shortcut-img }}
+</div>
+{% endcapture -%}
+{%- capture no_data-vert %}
+<div class="flex flex--col gap--large">
+  <div class="flex flex--col gap--xsmall">
+    <span class="title--large text--center">No data found (yet)</span>
+    <span class="description--large font--regular text--center">Get the Apple Shortcut to load your tasks into this plugin:</span>
+  </div>
+  {{ apple_shortcut-img }}
+</div>
+{% endcapture -%}
