@@ -18,10 +18,6 @@ custom_fields:
   description: 'Shows shopping list in TRMNL'
   learn_more_url: https://culturedcode.com/things/
   email_address: charlie@evilforbeginners.com
-- keyname: webhook_url
-  name: Webhook URL
-  field_type: copyable_webhook_url
-  description: Paste this into the Apple Shortcut!
 - keyname: lines_title
   name: Maximum Lines Title
   description: 0 = No limit
