@@ -15,7 +15,7 @@ custom_fields:
   name: About This Plugin
   category: life,productivity
   field_type: author_bio
-  description: 'Shows shopping list in TRMNL'
+  description: Shows shopping list in TRMNL
   learn_more_url: https://culturedcode.com/things/
   email_address: charlie@evilforbeginners.com
 - keyname: lines_title
