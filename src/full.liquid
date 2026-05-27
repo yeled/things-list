@@ -4,11 +4,9 @@
       
       {% if reg_todos != blank %}
         {{ regular_todos }}
-      {% endif %}
-      
-      {% if todos == blank and total != blank %}
+      {% elsif total != blank %}
         {{ empty_state }}
-      {% elsif total == blank %}
+      {% else %}
         {{ no_data-vert }}
       {% endif %}
     </div>

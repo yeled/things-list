@@ -2,11 +2,10 @@
   <div class="columns" data-overflow-max-cols="3" data-overflow-counter="true">
     <div class="column"> 
       {% if reg_todos != blank %}
-      {{ regular_todos }}
-      {% endif %}
-      {% if todos == blank and total != blank %}
+        {{ regular_todos }}
+      {% elsif total != blank %}
         {{ empty_state }}
-      {% elsif total == blank %}
+      {% else %}
         {{ no_data-hor }}
       {% endif %}
     </div>
