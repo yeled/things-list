@@ -22,6 +22,7 @@
 <span class="label label--medium group-header" data-group-header="true"></span>
 {% for todo in reg_todos %}
 <div class="item">
+  <div class="meta"></div>
   <div class="content">
     <span class="title title--small font--regular"
       {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
