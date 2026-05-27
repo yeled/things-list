@@ -8,7 +8,7 @@
         {{ empty_state }}
       {% elsif total == blank %}
         {{ no_data-hor }}
-      {% elsif dones != blank and crit_todos == blank %}
+      {% elsif dones != blank %}
         {{ done_todos }}
       {% endif %}
     </div>
