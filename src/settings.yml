@@ -34,11 +34,6 @@ custom_fields:
   default: 2
   min: -1
   max: 6
-- keyname: show_dones
-  name: Show Finished To-Dos
-  field_type: boolean
-  group: Display Options
-  default: true
 - keyname: show_progress
   name: Show Progress Dots
   field_type: boolean
