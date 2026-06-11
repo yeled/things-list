@@ -8,6 +8,8 @@
         {{ empty_state }}
       {% else %}
         {{ no_data-vert }}
+      {% elsif dones != blank %}
+        {{ done_todos }}
       {% endif %}
     </div>
   </div>

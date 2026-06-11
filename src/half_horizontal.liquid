@@ -7,6 +7,8 @@
         {{ empty_state }}
       {% else %}
         {{ no_data-hor }}
+      {% elsif dones != blank %}
+        {{ done_todos }}
       {% endif %}
     </div>
   </div>

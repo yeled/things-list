@@ -57,6 +57,38 @@
 {% endfor %}
 {% endcapture -%}
 
+{% if trmnl.plugin_settings.custom_fields_values.show_dones == "true" %}
+{%- capture done_todos %}
+<span class="label label--medium group-header" data-group-header="true">Finished</span>
+{% for todo in dones %}
+<div class="item">
+  <div class="meta">
+    <span class="index text--bold">✓</span>
+  </div>
+  <div class="content">
+    <span 
+      class="title title--small font--regular text--gray-25" 
+      style="text-decoration: line-through; text-decoration-color: black;"
+      {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
+        data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_title }}"
+      {% endif %}
+      >{{ todo.title }}</span>
+    {% if todo.project != blank or todo.reminder != blank %} 
+      <div class="flex flex--row">
+        {% if todo.project != blank %}
+        <span class="label label--small label--underline">
+          <img class="image w--2.5 h--2.5 mr--1" src="data:image/svg+xml;base64,{{ icon_project | base64_encode }}" />
+          {{ todo.project }}
+        </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endcapture -%}
+{% endif%}
+
 {% assign dones_size = dones.size %}
 {% assign current = dones_size | plus: 1 %}
 
