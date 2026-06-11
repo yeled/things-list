@@ -39,5 +39,5 @@ custom_fields:
   field_type: boolean
   group: Display Options
   default: true
-name: Things List
+name: Shopping List
 refresh_interval: 15
