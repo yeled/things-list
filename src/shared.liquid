@@ -29,14 +29,14 @@
       {% endif %}
       >{{ todo.title }}</span>
     {% if todo.description != blank and trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 != -1 %}
-    <span class="description mt--0.5 mb--1" 
+    <span class="description mt--0.5 mb--1"
       {% if trmnl.plugin_settings.custom_fields_values.lines_description | plus: 0 > 0 %}
       data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_description }}"
       {% endif %}
       >{{ todo.description }}
     </span>
     {% endif %}
-    {% if todo.project != blank or todo.reminder != blank %} 
+    {% if todo.project != blank or todo.reminder != blank %}
       <div class="flex flex--row">
         {% if todo.project != blank %}
         <span class="label label--small label--underline">
@@ -59,21 +59,23 @@
 
 {% if trmnl.plugin_settings.custom_fields_values.show_dones == "true" %}
 {%- capture done_todos %}
-<span class="label label--medium group-header" data-group-header="true">Finished</span>
+<span class="label label--medium group-header" data-group-header="true"></span>
 {% for todo in dones %}
+
 <div class="item">
   <div class="meta">
     <span class="index text--bold">✓</span>
   </div>
   <div class="content">
-    <span 
-      class="title title--small font--regular text--gray-25" 
+    <span
+      class="title title--small font--regular text--gray-25"
       style="text-decoration: line-through; text-decoration-color: black;"
       {% if trmnl.plugin_settings.custom_fields_values.lines_title | plus: 0 > 0 %}
         data-clamp="{{ trmnl.plugin_settings.custom_fields_values.lines_title }}"
       {% endif %}
       >{{ todo.title }}</span>
-    {% if todo.project != blank or todo.reminder != blank %} 
+      {{todo.description}}
+    {% if todo.project != blank or todo.reminder != blank %}
       <div class="flex flex--row">
         {% if todo.project != blank %}
         <span class="label label--small label--underline">

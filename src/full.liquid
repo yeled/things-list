@@ -1,15 +1,15 @@
 <div class="layout layout--top px--6">
   <div class="columns" data-overflow-max-cols="3" data-overflow-counter="true">
-    <div class="column"> 
-      
+    <div class="column">
+
       {% if todos != blank %}
         {{ regular_todos }}
+      {% if dones != blank %}
+        {{ done_todos }}
+        {% endif %}
       {% elsif total != blank %}
         {{ empty_state }}
-      {% else %}
         {{ no_data-vert }}
-      {% elsif dones != blank %}
-        {{ done_todos }}
       {% endif %}
     </div>
   </div>
