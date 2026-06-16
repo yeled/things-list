@@ -7,8 +7,77 @@ watch:
   - src
 
 # values of custom fields (defined in src/settings.yml)
-custom_fields: {}
+custom_fields: {show_progress: true, show_dones: true, lines_description: 2, lines_title: 2}
 
 # override variables
-variables:
-  trmnl: {}
+variables: {
+  "trmnl": {
+    plugin_settings: {
+    instance_name: "Shopping List",
+  }},
+    "todos" : [
+      {
+        "title" : "Bread",
+        "description" : ""
+      },
+      {
+        "title" : "Fish",
+        "description" : ""
+      },
+      {
+        "title" : "Wine",
+        "description" : ""
+      }
+    ],
+    "dones" : [
+      {
+        "title" : "Leek",
+        "description" : ""
+      },
+      {
+        "title" : "More fresh peas",
+        "description" : ""
+      },
+      {
+        "title" : "Milk",
+        "description" : ""
+      },
+      {
+        "title" : "Turmeric juice",
+        "description" : ""
+      },
+      {
+        "title" : "Cheerios",
+        "description" : ""
+      },
+      {
+        "title" : "Shreddies",
+        "description" : ""
+      },
+      {
+        "title" : "Leek",
+        "description" : ""
+      },
+      {
+        "title" : "More fresh peas",
+        "description" : ""
+      },
+      {
+        "title" : "Milk",
+        "description" : ""
+      },
+      {
+        "title" : "Turmeric juice",
+        "description" : ""
+      },
+      {
+        "title" : "Cheerios",
+        "description" : ""
+      },
+      {
+        "title" : "Shreddies",
+        "description" : ""
+      }
+    ],
+    "total" : 17
+  }
